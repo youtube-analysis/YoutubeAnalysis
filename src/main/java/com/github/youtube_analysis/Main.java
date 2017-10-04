@@ -1,5 +1,6 @@
 package com.github.youtube_analysis;
 
+import com.github.youtube_analysis.Controllers.MainDialogController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -17,6 +18,8 @@ import java.net.URL;
 public class Main extends Application {
     private static String key;
     private Stage primaryStage;
+    private BorderPane mainLayout;
+    private Scene scene;
     private AnchorPane rootLayout;
 
     public static String getName(){
@@ -38,6 +41,9 @@ public class Main extends Application {
         this.primaryStage.setTitle("Search in Youtube");
         initLayout();
         //loadKey();
+
+        initMainLayout();
+        showMainDialog();
     }
 
     // Загрузка ключа API из файла
@@ -53,6 +59,24 @@ public class Main extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void initMainLayout() throws IOException {
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("/MainLayout.fxml"));
+        mainLayout = loader.load();
+        scene = new Scene(mainLayout);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
+    public void showMainDialog() throws IOException {
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("/MainDialog.fxml"));
+        AnchorPane mainDialog = loader.load();
+        mainLayout.setCenter(mainDialog);
+
+        MainDialogController controller = loader.getController();
+        controller.setMainClass(this);
+        controller.setAboutField("Youtube Analysis", "Эта программа ...");
     }
 
     private void initLayout() {

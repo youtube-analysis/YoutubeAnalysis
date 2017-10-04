@@ -2,24 +2,23 @@ package com.github.youtube_analysis.Controllers;
 
 import com.github.youtube_analysis.Main;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 /**
  * Created by Vitaly Kurotkin on 01.10.17.
  */
-public class MainDialogController {
+public class MainDialogController extends MainLayoutController {
+    private Main mainClass;
     @FXML
-    private TextField nameField;
+    private Label nameField;
     @FXML
-    private TextField aboutField;
+    private Label aboutField;
 
-    @FXML
-    private void initialize() {
-        //nameField.setText("hjb");
-        //nameField.setText(Main.getAbout());
 
-        // Заполнение таблицы
-        //titleColumn.cellFactoryProperty(cell -> cell.getValue().)
+    public void setAboutField(String nameField, String aboutField){
+        this.nameField.setText(nameField);
+        this.aboutField.setText(aboutField);
     }
 
 }
