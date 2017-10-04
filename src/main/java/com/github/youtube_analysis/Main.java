@@ -1,12 +1,14 @@
 package com.github.youtube_analysis;
 
 import com.github.youtube_analysis.Controllers.MainDialogController;
+import com.github.youtube_analysis.Controllers.SettingsDialogController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.BufferedReader;
@@ -95,4 +97,21 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(rootLayout));
         primaryStage.show();
     }
+
+    public void showSettingsDialog() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/SettingsDialog.fxml"));
+        AnchorPane settingsDialog = loader.load();
+
+        Stage dialogStage = new Stage();
+        dialogStage.setTitle("Настройки");
+        dialogStage.initModality(Modality.WINDOW_MODAL);
+        dialogStage.initOwner(primaryStage);
+        Scene scene = new Scene(settingsDialog);
+        dialogStage.setScene(scene);
+        SettingsDialogController controller = loader.getController();
+        controller.setDialogStage(dialogStage);
+
+        dialogStage.showAndWait();
+    }
+
 }

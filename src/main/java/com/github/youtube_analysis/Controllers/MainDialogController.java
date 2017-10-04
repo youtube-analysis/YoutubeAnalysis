@@ -5,11 +5,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
+import java.io.IOException;
+
 /**
  * Created by Vitaly Kurotkin on 01.10.17.
  */
 public class MainDialogController extends MainLayoutController {
-    private Main mainClass;
     @FXML
     private Label nameField;
     @FXML
@@ -19,6 +20,10 @@ public class MainDialogController extends MainLayoutController {
     public void setAboutField(String nameField, String aboutField){
         this.nameField.setText(nameField);
         this.aboutField.setText(aboutField);
+    }
+
+    public void showSettingDialog() throws IOException {
+        mainClass.showSettingsDialog();
     }
 
 }

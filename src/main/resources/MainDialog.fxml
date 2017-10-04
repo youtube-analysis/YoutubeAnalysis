@@ -12,7 +12,7 @@
       <ButtonBar layoutX="14.0" layoutY="311.0" prefHeight="50.0" prefWidth="580.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
         <buttons>
             <Button mnemonicParsing="false" text="Перейти в YouTube Analytics" />
-          <Button mnemonicParsing="false" prefHeight="27.0" prefWidth="290.0" text="Перейти в Настройки" />
+          <Button mnemonicParsing="false" onAction="#showSettingDialog" prefHeight="27.0" prefWidth="290.0" text="Перейти в Настройки" />
         </buttons>
       </ButtonBar>
    </children>

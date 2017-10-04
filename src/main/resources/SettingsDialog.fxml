@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.github.youtube_analysis.Controllers.SettingsDialogController"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.youtube_analysis.Controllers.SettingsDialogController">
+   <children>
+      <ButtonBar layoutX="14.0" layoutY="346.0" prefHeight="40.0" prefWidth="568.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+        <buttons>
+          <Button mnemonicParsing="false" onAction="#handleOk" prefHeight="25.0" prefWidth="89.0" text="ОК" />
+            <Button mnemonicParsing="false" onAction="#handleOk" text="Отмена" />
+        </buttons>
+      </ButtonBar>
+   </children>
 </AnchorPane>
