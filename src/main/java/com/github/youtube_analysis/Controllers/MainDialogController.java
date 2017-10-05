@@ -22,8 +22,14 @@ public class MainDialogController extends MainLayoutController {
         this.aboutField.setText(aboutField);
     }
 
+    @FXML
     public void showSettingDialog() throws IOException {
         mainClass.showSettingsDialog();
+    }
+
+    //@FXML
+    public void showTaskDialog() throws IOException {
+        mainClass.showTaskDialog();
     }
 
 }

@@ -2,9 +2,11 @@ package com.github.youtube_analysis;
 
 import com.github.youtube_analysis.Controllers.MainDialogController;
 import com.github.youtube_analysis.Controllers.SettingsDialogController;
+import com.github.youtube_analysis.Controllers.TaskDialogController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -18,7 +20,6 @@ import java.io.IOException;
 import java.net.URL;
 
 public class Main extends Application {
-    private static String key;
     private Stage primaryStage;
     private BorderPane mainLayout;
     private Scene scene;
@@ -41,27 +42,13 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("Search in Youtube");
-        initLayout();
-        //loadKey();
+        this.primaryStage.getIcons().add(new Image("/images/icon.png"));
 
         initMainLayout();
         showMainDialog();
     }
 
-    // Загрузка ключа API из файла
-    private static void loadKey(){
-        try {
-            FileReader fileReader = new FileReader("key.txt");
-            BufferedReader reader = new BufferedReader(fileReader);
-            key = reader.readLine();
-        } catch (FileNotFoundException e) {
-            String errorMessage = "Нет файла key.txt";
-            System.out.println(errorMessage);
-            System.exit(0);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+
 
     public void initMainLayout() throws IOException {
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("/MainLayout.fxml"));
@@ -78,24 +65,17 @@ public class Main extends Application {
 
         MainDialogController controller = loader.getController();
         controller.setMainClass(this);
-        controller.setAboutField("Youtube Analysis", "Эта программа ...");
+        controller.setAboutField(getName(), getAbout());
     }
 
-    private void initLayout() {
-        URL url = getClass().getResource("/MainDialog.fxml");
-        FXMLLoader loader = new FXMLLoader(url);
-        try {
-            rootLayout = loader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.err.println("Url is " + url);
-        }
+    public void showTaskDialog() throws IOException {
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("/TaskDialog.fxml"));
+        AnchorPane taskDialog = loader.load();
+        mainLayout.setCenter(taskDialog);
 
-
-        //nameField.setText(Main.getName());
-        //nameField.setText(Main.getAbout());
-        primaryStage.setScene(new Scene(rootLayout));
-        primaryStage.show();
+        TaskDialogController controller = loader.getController();
+        controller.setMainClass(this);
+        //controller.setAboutField(getName(), getAbout());
     }
 
     public void showSettingsDialog() throws IOException {
@@ -104,13 +84,14 @@ public class Main extends Application {
 
         Stage dialogStage = new Stage();
         dialogStage.setTitle("Настройки");
+        //dialogStage.getIcons().add(new Image("file:/images/settings.png"));
+        dialogStage.getIcons().add(new Image("/images/settings.png"));
         dialogStage.initModality(Modality.WINDOW_MODAL);
         dialogStage.initOwner(primaryStage);
         Scene scene = new Scene(settingsDialog);
         dialogStage.setScene(scene);
         SettingsDialogController controller = loader.getController();
         controller.setDialogStage(dialogStage);
-
         dialogStage.showAndWait();
     }
 
