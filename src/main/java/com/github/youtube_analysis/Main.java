@@ -84,7 +84,6 @@ public class Main extends Application {
 
         Stage dialogStage = new Stage();
         dialogStage.setTitle("Настройки");
-        //dialogStage.getIcons().add(new Image("file:/images/settings.png"));
         dialogStage.getIcons().add(new Image("/images/settings.png"));
         dialogStage.initModality(Modality.WINDOW_MODAL);
         dialogStage.initOwner(primaryStage);
