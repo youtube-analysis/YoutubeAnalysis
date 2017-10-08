@@ -4,6 +4,7 @@ import com.github.youtube_analysis.controllers.MainDialogController;
 import com.github.youtube_analysis.controllers.SettingsDialogController;
 import com.github.youtube_analysis.controllers.TaskDialogController;
 import com.github.youtube_analysis.model.Channal;
+import com.github.youtube_analysis.model.Settings;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -24,14 +25,15 @@ public class Main extends Application {
     private AnchorPane rootLayout;
 
     public ObservableList<Channal> channalsData = FXCollections.observableArrayList();
+    public Settings settings;
 
     public static String getName(){
         return "Youtube Analysis ver.0.0.1";
     }
 
     public static String getAbout(){
-        return "Приложение для анализа YouTube каналов, сбора статистика " +
-                "и сравнения каналов по различным пользовательским запросам.";
+        return "Приложение для анализа YouTube каналов, сбора статистики " +
+                "и сравнения каналов \nпо различным пользовательским запросам.\n";
     }
 
     public static void main(String[] args) {
@@ -46,6 +48,8 @@ public class Main extends Application {
 
         initMainLayout();
         showMainDialog();
+
+        settings = new Settings("/", false, false);
     }
 
     public ObservableList<Channal> getChannalsData() {
@@ -91,7 +95,9 @@ public class Main extends Application {
         Scene scene = new Scene(settingsDialog);
         dialogStage.setScene(scene);
         SettingsDialogController controller = loader.getController();
+        controller.setMainClass(this);
         controller.setDialogStage(dialogStage);
+        controller.setSetting();
         dialogStage.showAndWait();
     }
 

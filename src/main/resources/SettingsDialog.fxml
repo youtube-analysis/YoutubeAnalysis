@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.youtube_analysis.controllers.SettingsDialogController">
    <children>
@@ -13,5 +19,36 @@
             <Button mnemonicParsing="false" onAction="#handleOk" text="Отмена" />
         </buttons>
       </ButtonBar>
+      <GridPane layoutX="14.0" layoutY="14.0" prefHeight="315.0" prefWidth="580.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="580.0" minWidth="10.0" prefWidth="537.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="100.0" minHeight="0.0" prefHeight="35.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="210.0" minHeight="10.0" prefHeight="175.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <CheckBox fx:id="saveCachCheckBox" mnemonicParsing="false" prefHeight="18.0" prefWidth="542.0" text="Сохранять кэш результатов которые возвращает YouTube на наши запросы.">
+               <opaqueInsets>
+                  <Insets left="5.0" />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="5.0" />
+               </padding>
+            </CheckBox>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+               <children>
+                  <TextField fx:id="urlOfCashTextField" layoutX="12.0" layoutY="51.0" prefHeight="27.0" prefWidth="557.0" />
+                  <Label layoutX="12.0" layoutY="25.0" text="Путь к папке с кэшем. Если кэш был сохранен в другую папку, то он игнорируется." />
+               </children>
+            </AnchorPane>
+            <CheckBox fx:id="showTimeCheckBox" mnemonicParsing="false" text="Отображать время затраченное программой на выполнение запроса." GridPane.rowIndex="1">
+               <padding>
+                  <Insets left="5.0" />
+               </padding>
+            </CheckBox>
+         </children>
+      </GridPane>
    </children>
 </AnchorPane>
