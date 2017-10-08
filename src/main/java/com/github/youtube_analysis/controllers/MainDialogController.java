@@ -31,4 +31,8 @@ public class MainDialogController extends MainLayoutController {
         mainClass.showTaskDialog();
     }
 
+    @FXML
+    private void goHyberlink(){
+        mainClass.goHyberlink();
+    }
 }

@@ -42,7 +42,7 @@
             <Font name="System Bold" size="32.0" />
          </font>
       </Label>
-      <Hyperlink layoutX="20.0" layoutY="294.0" text="https://github.com/youtube-analysis" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="20.0" />
+      <Hyperlink layoutX="20.0" layoutY="294.0" onAction="#goHyberlink" text="https://github.com/youtube-analysis" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="20.0" />
       <TextArea fx:id="aboutField" layoutX="20.0" layoutY="187.0" prefHeight="307.0" prefWidth="760.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" />
    </children>
 </AnchorPane>

@@ -101,4 +101,8 @@ public class Main extends Application {
         dialogStage.showAndWait();
     }
 
+    public void goHyberlink(){
+        getHostServices().showDocument("https://github.com/youtube-analysis");
+    }
+
 }

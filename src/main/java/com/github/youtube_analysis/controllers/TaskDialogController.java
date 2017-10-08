@@ -8,6 +8,7 @@ import com.github.youtube_analysis.api.youtube.channal.InfoResponce;
 import com.github.youtube_analysis.api.youtube.entities.Activity;
 import com.github.youtube_analysis.api.youtube.entities.ActivityResponce;
 import com.github.youtube_analysis.model.Channal;
+import javafx.application.Application;
 import javafx.beans.property.LongProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.StringProperty;
