@@ -1,18 +1,22 @@
 package com.github.youtube_analysis.controllers;
 
 import com.github.youtube_analysis.Main;
+import com.github.youtube_analysis.Utils.DateUtil;
+import com.github.youtube_analysis.api.YoutubeGetInfo;
 import com.github.youtube_analysis.api.YoutubeSearcher;
+import com.github.youtube_analysis.api.youtube.channal.InfoResponce;
 import com.github.youtube_analysis.api.youtube.entities.Activity;
 import com.github.youtube_analysis.api.youtube.entities.ActivityResponce;
-import com.github.youtube_analysis.api.youtube.entities.Snippet;
 import com.github.youtube_analysis.model.Channal;
+import javafx.beans.property.LongProperty;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -34,19 +38,33 @@ public class TaskDialogController {
     private TextField searchText;
 
     @FXML
-    private void initialize() {
+    private Label channelTitleLabel;
 
+    @FXML
+    private Label channelIdLabel;
+
+    @FXML
+    private Label subscriberCountLabel;
+
+    @FXML
+    private Label videoCountLabel;
+
+    @FXML
+    private Label viewCountLabel;
+
+    @FXML
+    private Label createDateLabel;
+
+    @FXML
+    private void initialize() {
         nameColumn.setCellValueFactory(cellData -> cellData.getValue().channelTitleProperty());
         idColumn.setCellValueFactory(cellData -> cellData.getValue().channelIdProperty());
 
-
-
-        // Слушаем изменения выбора.
-//        channalTableView.getSelectionModel()
-//                .selectedItemProperty()
-//                .addListener(
-//                        (observable, oldValue, newValue) -> showPersonDetails(newValue)
-//                );
+        channalTableView.getSelectionModel()
+                .selectedItemProperty()
+                .addListener(
+                        (observable, oldValue, newValue) -> showDetails(newValue)
+                );
     }
 
     public void setMainClass(Main mainClass) {
@@ -55,7 +73,7 @@ public class TaskDialogController {
     }
 
 
-    //@FXML
+    @FXML
     public void showMainDialog() throws IOException {
         mainClass.showMainDialog();
     }
@@ -85,8 +103,23 @@ public class TaskDialogController {
     private void addNewChannal(){
         String text = searchText.getText();
         if (!text.equals("")){
-            Channal channal = new Channal("", text);
-            mainClass.channalsData.add(channal);
+            try {
+                Channal channal = createChannal(text);
+                if(channal == null){
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.initOwner(mainClass.primaryStage);
+                    alert.setTitle("Не корректный id");
+                    alert.setHeaderText("Введен не корректный id");
+                    alert.setContentText("Пожалуйста, введите корректный id.");
+                    alert.showAndWait();
+                } else {
+                    mainClass.channalsData.add(channal);
+                }
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.initOwner(mainClass.primaryStage);
@@ -103,12 +136,11 @@ public class TaskDialogController {
         if (!text.equals("")){
             try {
                 YoutubeSearcher searcher = new YoutubeSearcher();
+
                 ActivityResponce responce = searcher.getResult(text);
                 for (Activity activity : responce.items ){
-                    String name = activity.snippet.channelTitle;
                     String id = activity.snippet.channelId;
-                    Channal channal = new Channal(name, id);
-                    mainClass.channalsData.add(channal);
+                    mainClass.channalsData.add(createChannal(id));
                 }
             } catch (ExecutionException e) {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -129,6 +161,38 @@ public class TaskDialogController {
             alert.showAndWait();
         }
         mainClass.channalsData.addAll();
+    }
 
+    private Channal createChannal(String id) throws ExecutionException, InterruptedException {
+        YoutubeGetInfo getterInfo = new YoutubeGetInfo();
+        InfoResponce info = getterInfo.getChannalInfo(id);
+        if(info.items.size() == 0){
+            return null;
+        }
+        String name = info.items.get(0).snippet.title;
+        long subscriberCount = Long.parseLong(info.items.get(0).statistics.subscriberCount);
+        long videoCount = Long.parseLong(info.items.get(0).statistics.videoCount);
+        long viewCount = Long.parseLong(info.items.get(0).statistics.viewCount);
+        Calendar createDate = info.items.get(0).snippet.publishedAt;
+
+        return new Channal(name, id, subscriberCount, videoCount, viewCount, createDate);
+    }
+
+    private void showDetails(Channal channal){
+        if (channal != null) {
+            channelTitleLabel.setText(channal.getChannelTitle());
+            channelIdLabel.setText(channal.getChannelId());
+            subscriberCountLabel.setText(Long.toString(channal.getSubscriberCount()));
+            videoCountLabel.setText(Long.toString(channal.getVideoCount()));
+            viewCountLabel.setText(Long.toString(channal.getViewCount()));
+            createDateLabel.setText(DateUtil.format(channal.getCreateDate()));
+        } else {
+            channelTitleLabel.setText("");
+            channelIdLabel.setText("");
+            subscriberCountLabel.setText("");
+            videoCountLabel.setText("");
+            viewCountLabel.setText("");
+            createDateLabel.setText("");
+        }
     }
 }
