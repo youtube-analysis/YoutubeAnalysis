@@ -1,9 +1,7 @@
-package com.github.youtube_analysis.Controllers;
+package com.github.youtube_analysis.controllers;
 
-import com.github.youtube_analysis.Main;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 
 import java.io.IOException;
 

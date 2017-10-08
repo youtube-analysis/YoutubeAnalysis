@@ -1,29 +1,29 @@
 package com.github.youtube_analysis;
 
-import com.github.youtube_analysis.Controllers.MainDialogController;
-import com.github.youtube_analysis.Controllers.SettingsDialogController;
-import com.github.youtube_analysis.Controllers.TaskDialogController;
+import com.github.youtube_analysis.controllers.MainDialogController;
+import com.github.youtube_analysis.controllers.SettingsDialogController;
+import com.github.youtube_analysis.controllers.TaskDialogController;
+import com.github.youtube_analysis.model.Channal;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
-import java.net.URL;
 
 public class Main extends Application {
-    private Stage primaryStage;
+    public Stage primaryStage;
     private BorderPane mainLayout;
     private Scene scene;
     private AnchorPane rootLayout;
+
+    public ObservableList<Channal> channalsData = FXCollections.observableArrayList();
 
     public static String getName(){
         return "Youtube Analysis ver.0.0.1";
@@ -48,7 +48,9 @@ public class Main extends Application {
         showMainDialog();
     }
 
-
+    public ObservableList<Channal> getChannalsData() {
+        return channalsData;
+    }
 
     public void initMainLayout() throws IOException {
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("/MainLayout.fxml"));
@@ -75,7 +77,6 @@ public class Main extends Application {
 
         TaskDialogController controller = loader.getController();
         controller.setMainClass(this);
-        //controller.setAboutField(getName(), getAbout());
     }
 
     public void showSettingsDialog() throws IOException {

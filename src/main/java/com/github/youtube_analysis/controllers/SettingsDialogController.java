@@ -1,4 +1,4 @@
-package com.github.youtube_analysis.Controllers;
+package com.github.youtube_analysis.controllers;
 
 import javafx.fxml.FXML;
 import javafx.stage.Stage;

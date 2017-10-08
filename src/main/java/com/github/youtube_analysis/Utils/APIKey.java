@@ -22,7 +22,7 @@ public class APIKey {
         return key;
     }
 
-    // Загрузка ключа API из файла
+    // Загрузка ключа api из файла
     private static String loadKey(){
         try {
             FileReader fileReader = new FileReader("key.txt");

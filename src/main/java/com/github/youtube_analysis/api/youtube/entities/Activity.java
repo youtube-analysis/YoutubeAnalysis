@@ -1,4 +1,4 @@
-package com.github.youtube_analysis.API.youtube.entities;
+package com.github.youtube_analysis.api.youtube.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

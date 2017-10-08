@@ -1,4 +1,4 @@
-package com.github.youtube_analysis.Controllers;
+package com.github.youtube_analysis.controllers;
 
 import com.github.youtube_analysis.Main;
 

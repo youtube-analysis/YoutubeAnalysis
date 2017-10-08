@@ -1,7 +1,7 @@
-package com.github.youtube_analysis.API;
+package com.github.youtube_analysis.api;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.github.youtube_analysis.API.youtube.entities.ActivityResponce;
+import com.github.youtube_analysis.api.youtube.entities.ActivityResponce;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.Unirest;
 
@@ -12,8 +12,8 @@ import java.util.concurrent.Future;
 /**
  * Created by Vitaly Kurotkin on 06.10.2017.
  */
-public class YoutubeSearcher {
-    public YoutubeSearcher(){
+public class ChannalInfo {
+    public ChannalInfo(){
         Unirest.setObjectMapper(new com.mashape.unirest.http.ObjectMapper() {
             private com.fasterxml.jackson.databind.ObjectMapper jacksonObjectMapper = new com.fasterxml.jackson.databind.ObjectMapper();
             public <T> T readValue(String value, Class<T> valueType) {
