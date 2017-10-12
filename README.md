@@ -12,8 +12,8 @@ An application for analyzing YouTube channels, collecting statistics and compari
 - Текст: Приветственное сообщение
 - Текст: Название программы и ее версия
 - UI: Действия:
- * Перейти в YouTube Analytics
- * Перейти в Настройки
+    * Перейти в YouTube Analytics
+    * Перейти в Настройки
 
 ### Окно Настройки
 Действия:
@@ -27,7 +27,7 @@ An application for analyzing YouTube channels, collecting statistics and compari
 Состоит из:
 - Кнопки возврата на главнфй экран
 - Списка каналов с возможностью
- * Найти канал
- * Добавить канал
- * Удалить канал
- * Очистить список каналов
+    * Найти канал
+    * Добавить канал
+    * Удалить канал
+    * Очистить список каналов
